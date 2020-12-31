@@ -5,7 +5,7 @@
 		SELECT * from parkinfoall limit #{page},#{size}
 	</select>
 	<select id="findAllParkinfoallByLike" resultType="com.yxq.carpark.dto.ParkinfoallData">
-		SELECT * from parkinfoall t where t.cardnum like '%${name}%' || t.carnum like '%${name}%' || t.parknum like '%${name}%' limit #{page},#{size}
+		SELECT * from parkinfoall t where t.cardnum like '%${name}%' || t.carnum like '%${name}%' || t.parknum like '%${name}%' ORDER BY parkin DESC limit #{page},#{size}
 	</select>
 	<insert id="save">
 		insert into parkinfoall (cardnum,parknum,carnum,parkin,parkout,parktemp) values(#{cardnum},#{parknum},#{carnum},#{parkin},#{parkout},#{parktemp})

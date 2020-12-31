@@ -20,7 +20,7 @@
 		<!-- 默认匹配所有的请求 -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 字符编码过滤器，一定要放在所有过滤器之前 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>

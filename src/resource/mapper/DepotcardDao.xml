@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yxq.carpark.dao.DepotcardDao">
-	<select id="findAllDepotcard" resultType="com.yxq.carpark.dto.DepotcardManagerData" parameterType="String">
+    <select id="findAllDepotcard" resultType="com.yxq.carpark.dto.DepotcardManagerData" parameterType="String">
 		SELECT c.cardnum,t.type,c.money,c.time,c.islose,u.username
-		FROM user u, card c ,cardtype t
+		FROM `user` u, card c ,cardtype t
 		where u.cardid=c.id and t.id=c.type and c.cardnum like '%${cardnum}%'  
 		limit #{page},#{size}
 	</select>
-	<insert id="save"	parameterType="com.yxq.carpark.entity.Depotcard">
-		INSERT INTO card(cardnum,type,money,time,deductedtime) values(#{cardnum},#{type},#{money},#{time},#{deductedtime})
+    <insert id="save" parameterType="com.yxq.carpark.entity.Depotcard">
+		INSERT INTO card(cardnum,carnum,type,money,time,deductedtime) values(#{cardnum},#{carnum},#{type},#{money},#{time},#{deductedtime})
 	</insert>
-	<select id="findByCardnum" resultType="com.yxq.carpark.entity.Depotcard" parameterType="String">
+    <select id="findByCardnum" resultType="com.yxq.carpark.entity.Depotcard" parameterType="String">
 		SELECT * FROM card where cardnum = #{cardnum}
 	</select>
-	<select id="findByCardid" resultType="com.yxq.carpark.entity.Depotcard">
+    <select id="findByCardid" resultType="com.yxq.carpark.entity.Depotcard">
 		SELECT * FROM card where id = #{cardid}
 	</select>
-	<update id="updateDepotcardBycardnum" parameterType="com.yxq.carpark.entity.Depotcard">
+    <update id="updateDepotcardBycardnum" parameterType="com.yxq.carpark.entity.Depotcard">
 		update card set type=#{type},money=#{money},islose=#{islose},illegalcount=#{illegalcount} 
 		where cardnum=#{cardnum}
 	</update>
-	<delete id="deleteDepotCard" parameterType="String">
+    <delete id="deleteDepotCard" parameterType="String">
 		DELETE from card where cardnum=#{cardnum}
 	</delete>
-	<update id="addMoney">
+    <update id="addMoney">
 		update card set money=#{money} where cardnum=#{cardnum}
 	</update>
-	<select id="findAllDepotcardCount" resultType="int">
-		select count(*) from card c where c.cardnum like '%${cardnum}%'  
+    <select id="findAllDepotcardCount" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT c.cardnum
+			FROM `user` u, card c ,cardtype t
+			where u.cardid=c.id and t.id=c.type and c.cardnum like '%${cardnum}%'
+		) a
 	</select>
-	<select id="findByCardId" resultType="com.yxq.carpark.dto.DepotcardManagerData">
+    <select id="findByCardId" resultType="com.yxq.carpark.dto.DepotcardManagerData">
 		SELECT c.cardnum,t.type,c.money,c.time,c.islose,u.username
 		FROM user u, card c ,cardtype t
 		where u.cardid=c.id and t.id=c.type and c.id=#{cardid}
 	</select>
-	<update id="updateCardnum">
+    <update id="updateCardnum">
 		update card set cardnum=#{cardnumNew} where cardnum=#{cardnum}
 	</update>
-	
-	<select id="findCardnumByCarnum" resultType="String">
+
+    <select id="findCardnumByCarnum" resultType="String">
 		SELECT cardnum FROM card where carnum = #{carnum}
+	</select>
+
+    <select id="findCardnumByCarnum1" resultType="String">
+		SELECT c.cardnum FROM user u LEFT JOIN card c on u.cardid=c.id WHERE c.carnum=#{carnum}
 	</select>
 </mapper>

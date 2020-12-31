@@ -119,7 +119,6 @@
 		$("#myModal").modal('show');
 	}
 	function findUser() {
-		debugger;
 		var username = $("#username").val();
 		if (username == "") {
 

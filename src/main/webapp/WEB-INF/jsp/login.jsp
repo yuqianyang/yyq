@@ -23,7 +23,7 @@
 		<div class="form-group" style="width: 50%;">
 			<label for="firstname" class="col-sm-2 control-label" style="color:white;">账号</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="username" name="username"
+				<input type="text" class="form-control" id="username" name="username" value="123456"
 					placeholder="请输入账号" style="width: 80%;" onblur="checkUsernameExit(this)">
 					<span style="color: red"></span>
 			</div>
@@ -31,7 +31,7 @@
 		<div class="form-group" style="width: 50%;">
 			<label for="lastname" class="col-sm-2 control-label" style="color:white;">密码</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="password" name="password"
+				<input type="password" class="form-control" id="password" name="password" value="123456"
 					placeholder="请输入密码" style="width: 80%;" onblur="checkPasswordNull(this)">
 					<span style="color: red"></span>
 			</div>

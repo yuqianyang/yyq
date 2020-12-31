@@ -30,5 +30,7 @@ public interface DepotcardService {
 
 	String findCardnumByCarnum(String carnum);
 
+	String findCardnumByCarnum1(String carnum);
+
 
 }
